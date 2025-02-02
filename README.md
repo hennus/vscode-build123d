@@ -7,11 +7,11 @@ Build123d Dev environment (VSCode + OCP-Viewer) in Browser
 
 ## Using Docker
 
-`docker create --name build123d ghcr.io/ankurvdev/vscode-build123d:main -v ./sample:/data`
+`docker run -d  -v ./sample:/data -p 5000:8080 --name build123d ghcr.io/ankurvdev/vscode-build123d:latest `
 
 ## Using Podman (Rootless container)
 
-`podman create --name build123d ghcr.io/ankurvdev/vscode-build123d:main -v ./sample:/data`
+`podman run -d  -v ./sample:/data:Z -p 5000:8080 --name build123d ghcr.io/ankurvdev/vscode-build123d:latest `
 
 The website can be accessed via http://localhost:5000
 
