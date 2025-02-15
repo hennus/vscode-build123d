@@ -1,9 +1,15 @@
 version: "3"
 services:
   build123d:
-    image: ghcr.io/ankurvdev/vscode-build123d:main
-    restart: unless-stopped
+    image: build123d-local
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      # target: stage1
+    #image: ghcr.io/ankurvdev/vscode-build123d:main
+    restart: "no"
     ports:
+      # expose vs-code + viewer on port 5000
       - 5000:8080
     volumes:
-      - ./sample:/data
+      - /home/hennus/Documents/3D-printing/Build123d:/data
