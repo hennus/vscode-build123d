@@ -2,9 +2,10 @@
 set -e
 set -u
 set -o pipefail
+set -x
 
 microdnf -y update
-microdnf -y install curl python3-pip python3-virtualenv git libglvnd-glx python3-NLopt python3.13 python3-pip python3-virtualenv entr make vim
+microdnf -y install curl python3-pip python3-virtualenv git libglvnd-glx python3-NLopt python3.13 python3-pip python3-virtualenv entr make vim procps
 microdnf clean all
 
 alternatives --install /usr/bin/python python /usr/bin/python3.13 1
@@ -21,8 +22,9 @@ python3.13 -m pip install --root-user-action=ignore -r /requirements.txt
 mkdir /vscode
 curl -fsSL https://code-server.dev/install.sh > /vscode/code-server-install.sh
 
-sh < /code-server-install.sh
+sh < /vscode/code-server-install.sh
 
+echo "Installing vscode extensions..."
 bash /install_vsix.sh "ms-python" "python"
 bash /install_vsix.sh "ms-python" "black-formatter"
 bash /install_vsix.sh "ms-vscode" "vs-keybindings"
